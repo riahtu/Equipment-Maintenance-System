@@ -1,0 +1,150 @@
+<?php
+require("db_ems.php");
+session_start();
+ date_default_timezone_set('Asia/Kuala_lumpur');
+ $now = date("YmdHis");
+ $year = date("Y");
+$result1= mysql_query("SELECT * from physical_count_header where pc_docno = '$_GET[pcdocno]'");
+if (!mysql_num_rows($result1) == 0 )
+{
+	while($row1 = mysql_fetch_array($result1))
+    {
+		$company = $row1[company];
+		$recno = $row1[recno];
+		$storeid = $row1[storeid];
+		$countdate = $row1[countdate];
+		$createtime = $row1[createtime];
+		$remarks = $row1[remarks];
+		$userid = $row1[userid];
+	}
+}
+//echo "<div id='test1' style='position:relative;top:100px;left:300px;width:300px;height:300px;z-index:1000;border:1px solid #004000;'></div>";
+echo "<div id='workorder_new' style='position:relative;top:0px;left:0px;width:1000px;min-height:300px;'>";
+echo "<table>";
+echo "<tr><td style='width:900px;text-align:left;font-weight:bold;font-size:12px;'>Physical Count Document : $_GET[pcdocno]</td><td> </td></tr>";
+echo "</table>";
+
+echo "<input type='hidden' id='pcdocno' value='$_GET[pcdocno]'/>";
+echo "<input type='hidden' id='recno' value='$recno'/>";
+
+echo "<table style='text-align:left;margin-top:10px;'>";
+echo "<tr>";
+echo "<td style='width:150px;'>Workorder Type</td>";
+ echo "<td><select id='wo_select_wo_type' style='font:10px bold;font-family:arial;background-color:#EAFFF4;padding-left:5px;height:26px;border:1px solid #808080;'   >   ";
+	$resultrec2 = mysql_query("SELECT * FROM m_wo_type    ");
+	if (!mysql_num_rows($resultrec2) == 0 )
+	{	
+	
+		while($row2 = mysql_fetch_array($resultrec2))
+		{
+			$selected = '';
+		    if ($row2[wo_type] == $wo_type) $selected = 'selected';
+			echo "<option value='$row2[wo_type]' $selected> $row2[desc] </option>    ";
+		}  
+	}
+	echo "</select></td>"; 
+echo "</tr>";
+echo "<tr>";
+echo "<td style='width:150px;'>Production Line</td>";
+ echo "<td><select id='wo_select_linecode' style='font:10px bold;font-family:arial;background-color:#EAFFF4;padding-left:5px;height:26px;border:1px solid #808080;'   >   ";
+	$resultrec = mysql_query("SELECT linecode FROM m_equipment  group by linecode order by linecode ");
+	if (!mysql_num_rows($resultrec) == 0 )
+	{	
+	    
+		while($row11 = mysql_fetch_array($resultrec))
+		{
+			$selected = '';
+		    if ($row11[linecode] == $linecode) $selected = 'selected';
+			echo "<option value='$row11[linecode]' $selected>$row11[linecode]</option>    ";
+		}  
+	}
+	echo "</select></td>"; 
+echo "</tr>";
+echo "<tr>";
+echo "<td style='width:150px;'>Equipment</td>";
+ echo "<td><select id='wo_select_equipmentid' name='select_equipmentid' style='font:10px bold;font-family:arial;background-color:#EAFFF4;padding-left:5px;height:26px;border:1px solid #808080;'   >   ";
+	$resultrec = mysql_query("SELECT * FROM m_equipment where linecode = '$linecode'   ");
+	if (!mysql_num_rows($resultrec) == 0 )
+	{	
+	  
+		while($row11 = mysql_fetch_array($resultrec))
+		{
+			$selected = '';
+		    if ($row11[equipmentid] == $equipmentid) $selected = 'selected';
+			echo "<option value='$row11[equipmentid]' $selected>$row11[description]($row11[equipmentid])</option>    ";
+		}  
+	}
+	echo "</select></td>"; 
+echo "</tr>";
+
+
+
+
+if($wo_type == 'PV')
+{
+echo "<tr id='pv_schedule' style=''>";
+echo "<td style='width:150px;'>Preventive Schedule </td>";
+ echo "<td><select id='wo_select_pv_schedule' name='select_pv_schedule' style='font:10px bold;font-family:arial;background-color:#EAFFF4;padding-left:5px;height:26px;border:1px solid #808080;'   >   ";
+	$resultrec = mysql_query("SELECT * FROM t_pv_schedules where equipmentid = '$equipmentid' order by pv_date  ");
+	if (!mysql_num_rows($resultrec) == 0 )
+	{	
+	  
+		while($row11 = mysql_fetch_array($resultrec))
+		{
+			$resultrec22 = mysql_query("SELECT * FROM t_workorder where pv_schedule_recno = '$row11[recno]'  and workorderid = '$_GET[workorderid]' ");
+			if (!mysql_num_rows($resultrec22) == 0 )
+			{	
+				$pv_date = convertdate($row11[pv_date]);
+				echo "<option value='$row11[recno]' selected>$pv_date </option>    ";
+			}
+			$resultrec2 = mysql_query("SELECT * FROM t_workorder where pv_schedule_recno = '$row11[recno]'   ");
+			if (mysql_num_rows($resultrec2) == 0 )
+			{	
+			
+				$pv_date = convertdate($row11[pv_date]);
+				echo "<option value='$row11[recno]' >$pv_date </option>    ";
+			}
+		
+		}
+	}
+echo "</select></td>"; 
+echo "</tr>";
+}
+echo "<tr><td style='width:150px;'>Problem</td>";
+echo "<td><textarea id='wo_problem' style='vertical-align:top;font-size:10px;font-family:arial;width:500px;height:50px;text-transform: uppercase;' >$problem</textarea>    </td>   ";
+echo "</tr>";
+
+echo "<tr><td style='width:150px;'>Instructions</td>";
+echo "<td><textarea id='wo_instructions' style='vertical-align:top;font-size:10px;font-family:arial;width:500px;height:50px;text-transform: uppercase;' >$instructions</textarea>  </td>   ";
+echo "</tr>";
+
+echo "<tr><td style='width:150px;'>Remarks</td>";
+echo "<td><textarea id='wo_remarks' style='vertical-align:top;font-size:10px;font-family:arial;width:500px;height:50px;text-transform: uppercase;' >$remarks</textarea>  </td>   ";
+echo "</tr>";
+echo "</table>";
+
+
+echo "<div id='wo_select_parts' style='width:98%;border-top:1px solid #51A2A2;margin-top:5px;'>";
+?>
+<script>
+	var equipmentid = $('#wo_select_equipmentid').val();
+	var workorderid = $('#workorderid').val();
+	$.get('oth_wo_select_equipment_change.php?equipmentid='+equipmentid+'&workorderid='+workorderid, function(data) {
+		$("#wo_select_parts").html(data);
+	});
+
+</script>
+<?php
+echo "</div>";
+echo "</div> ";
+
+
+function convertdate($indate)
+{
+	$dd = substr( $indate,8,2);
+	$mm = substr( $indate,5,2);
+	$yyyy = substr( $indate,0,4);
+	$outdate = $dd ."-". $mm . "-" . $yyyy;
+	return $outdate;
+}
+?>
