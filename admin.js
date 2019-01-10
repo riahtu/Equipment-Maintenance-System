@@ -314,7 +314,7 @@ function master_part_save()
 	else
 		critical = '';
 
-	if(partnumber =='' && description=='' && safetyqty == '' && usageqty == ''){
+	if(partnumber =='' || description=='' || safetyqty == '' || usageqty == ''){
 		alert('Input Error');
 		return;
 	}
@@ -360,7 +360,7 @@ function master_machine_save()
 	acquiredDate = acquiredDate.substring(6)+'-'+acquiredDate.substring(3,5)+'-'+acquiredDate.substring(0,2);
 	installedDate = installedDate.substring(6)+'-'+installedDate.substring(3,5)+'-'+installedDate.substring(0,2);
 	
-	if(machineName == '' && prodLine == ''){
+	if(machineName == '' || prodLine == ''){
 		alert('Input Error');
 		return;
 	}
