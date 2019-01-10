@@ -880,6 +880,25 @@ function close_workorder()
 }
 
 
+$(document).on('click', '#delete_pc',delete_pc);
+function delete_pc() 
+{
+	var check = confirm("Delete Schedule?");
+	if (check == true)
+	{
+		var pcdocno = $(this).attr("pcdocno");
+		$.get('pc_delete_schedule.php?pcdocno='+pcdocno, function(data) {
+			if(data != '') alert(data);
+			 $("#mm_right_content").html("<img  style='margin-top:150px;margin-left:230px;'  src='images/loading.gif'/> Please wait");
+			$.get('pc_m2.php', function(data) {
+			$("#mm_right_content").html(data);
+			});
+		});
+		
+	}
+
+}
+
 function reshow_menu_l3()
 {
      
@@ -2012,6 +2031,27 @@ function pb_search_partmaster()
 	
 }
 
+$(document).on('change', '#pc_partname',pc_search_partmaster);
+$(document).on('change', '#pc_sparepartid',pc_search_partmaster);
+$(document).on('change', '#pc_machine',pc_search_partmaster);
+$(document).on('change', '#pc_barcode',pc_search_partmaster);
+$(document).on('change', '#pc_partnumber',pc_search_partmaster);
+function pc_search_partmaster()
+{
+	var partname = $("#pc_partname").val();
+	var machine = $("#pc_machine").val();
+	var sparepartid = $("#pc_sparepartid").val();
+	var barcode = $("#pc_barcode").val();
+	var partnumber = $("#pc_partnumber").val();
+	var pcdocno = $("#pc_docno").val();
+
+	$("#wo_show_list").html("<img  style='margin-top:50px;margin-left:50px;'  src='images/loading.gif'/> Searching in Progress Please wait");
+	$.get('pc_search_parts_master.php?partname='+partname+'&machine='+machine+'&sparepartid='+sparepartid+'&barcode='+barcode+'&partnumber='+partnumber+'&pcdocno='+pcdocno, function(data) {
+		$("#wo_show_list").html(data);
+	});
+	
+}
+
 $(document).on('click', '.pb_choose_parts_master',pb_choose_parts_master);
 function pb_choose_parts_master()
 {
@@ -2973,7 +3013,7 @@ function pp_left_menu()
 	$(".pp_left_menu").removeClass("pp_left_menu_pick");
 		$(this).addClass("pp_left_menu_pick");
 	    $("#mm_right_content").html("<img  style='margin-top:150px;margin-left:230px;'  src='images/loading.gif'/> Please wait");
-	var program  = $(this).attr("program");
+		var program  = $(this).attr("program");
 		$.get(program, function(data) {
 			$("#mm_right_content").html(data);
 		
@@ -3486,6 +3526,7 @@ function rep_left_menu()
 	
 }
 */
+
 $(document).on('click', '#rep_m1_1_execute',rep_m1_1_execute);
 function rep_m1_1_execute()
 {
@@ -3498,9 +3539,9 @@ function rep_m1_1_execute()
 	programloc = program+'?company='+company+'&sparepartname='+sparepartname+'&barcode='+barcode+'&maker='+maker+'&supplier='+supplier;
     window.open(programloc, "_blank", "toolbar=no,scrollbars=yes,location=no,menubar=no,resizable=yes,top=50,left=50,width=1200,height=500"); 
 	
-	}
+}
 	
-	
+
 $(document).on('click', '.rep_m1_menu',rep_m1_menu);
 function rep_m1_menu()
 {
@@ -3516,7 +3557,6 @@ function rep_m1_menu()
 }	
 
 $(document).on('click', '.rep_left_menu',rep_left_menu);
-
 function rep_left_menu()
 {
 	 $("#show_content").html("<img  style='margin-top:150px;margin-left:230px;'  src='images/loading.gif'/> Please wait");
@@ -3582,13 +3622,13 @@ function generate_st()
   $("#generate_st").hide();
   var storeidid = $("#storeidid").val();
   var st_date = $("#st_date").val();
-  alert('test');
+  //alert('test');
   $.ajax({
         type: "POST",
         url: "pc_m1_new.php",
         data: {st_date:st_date,storeidid:storeidid},
         success: function(datax) {
-           alert("success data"+datax);
+         //  alert("success data"+datax);
 		   var jsonData = JSON.parse(datax);
 		   var error_found = jsonData.error_found;
 		   var docno = jsonData.docno;
@@ -3596,12 +3636,12 @@ function generate_st()
 	       if(error_found != '') alert("Error found");
         },
 		 error : function(dataerr, status, error) {
-            alert("error data "+dataerr);
+		//alert("error data "+dataerr);
             e.preventDefaultEvent();
         }
 		
     });
-    alert('testccc');
+   // alert('testccc');
 
   
 }
@@ -3612,9 +3652,7 @@ function pc_m2()
 	    $(".mm_left_menu").removeClass("mm_pick");
 		$(this).addClass("mm_pick");
 		$("#mm_right_content").html("<img  style='margin-top:150px;margin-left:230px;'  src='images/loading.gif'/> Please wait");
-		$.get('pc_m2.php', function(data) {
-	
-			
+		$.get('pc_m2.php', function(data){
 			$("#mm_right_content").html(data);
 		
 	});
@@ -3628,11 +3666,27 @@ function pc_m2_view()
 	var countdate = $(this).attr("countdate");
 	var storeid = $(this).attr("storeid");
 	var username = $(this).attr("username");
+	$("#wo_show_list").html("<img style='margin-top:50px;margin-left:50px;'  src='images/loading.gif'/> Searching in Progress Please wait");
+	$.get('pc_m2_view.php?pcdocno='+pcdocno+'&countdate='+countdate+'&storeid='+storeid+'&username'+username, function(data) {
+		 $("#mm_right_content").html(data);			
+	});	
+}
+
+/*
+$(document).on('click', '.pc_m2_view',pc_m2_view);
+function pc_m2_view()
+{
+	var pcdocno = $(this).attr("pcdocno");
+	var countdate = $(this).attr("countdate");
+	var storeid = $(this).attr("storeid");
+	var username = $(this).attr("username");
 	 $("#wo_show_list").html("<img  style='margin-top:50px;margin-left:50px;'  src='images/loading.gif'/> Searching in Progress Please wait");
 	 $.get('pc_m2_view.php?pcdocno='+pcdocno+'&countdate='+countdate+'&storeid='+storeid+'&username'+username, function(data) {
 		 $("#mm_right_content").html(data);			
 	});	
 }
+*/
+
 
 $(document).on('click', '.pc_m2_change',pc_m2_change);
 function pc_m2_change()
