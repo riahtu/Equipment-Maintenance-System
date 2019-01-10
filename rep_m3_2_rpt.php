@@ -76,7 +76,7 @@ if (!mysql_num_rows($result1) == 0 )
 			while ($rowcount = mysql_fetch_array($resultcount))
 			{
 			$no++;
-			   echo "<tr><td> Check pc $row1[sparepartid]</td></tr>";
+
 			   $balance = $rowcount[stocktake_qty] ;
 			    $open_startdate = $rowcount[stocktake_date];
 			}

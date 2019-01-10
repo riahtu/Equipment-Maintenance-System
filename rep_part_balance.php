@@ -1,15 +1,14 @@
+
 <script >
 	$(document).ready (function(){
 		$("#img_part").hide();
 		$("#btn_hide_image").hide();
-
 	});
 	$(document).on('click','#btn_show_image',showImage);
 	function showImage(){
 		$("#img_part").show();
 		$("#btn_hide_image").show();
-		$("#btn_show_image").hide();
-		
+		$("#btn_show_image").hide();	
 	}
 	$(document).on('click','#btn_hide_image',hideImage);
 	function hideImage(){
@@ -17,9 +16,7 @@
 		$("#btn_hide_image").hide();
 		$("#btn_show_image").show();
 	}
-
 </script>
-
 
 <?php
 session_start();
@@ -109,12 +106,5 @@ if (!mysql_num_rows($result1) == 0 )
 			echo "<div id='img_part' style='margin:0px auto;height:20px;text-align:left;margin-top:20px;width:700px;height:400px;overflow:scroll; overflow-x: hidden;border:0px solid #BCBCBC;' border=0>";
 			echo "<img src='$image' style='width:500px;margin:auto;display:block;'> ";
 			echo "</div>";
-		
-		
-		
 
-		
-
-		
-	
 ?>
