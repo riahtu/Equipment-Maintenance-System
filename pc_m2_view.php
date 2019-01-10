@@ -2,15 +2,35 @@
 session_start();
 require("db_ems.php");
 echo "<table>";
+	echo "<p style='font-size:12px;' >Search for parts</p>";
+	//echo "<div style='margin-bottom:10px;'>";
+	echo "<table style='margin-left:30px;margin-top:10px;margin-bottom:10px;text-align:left;border:1px solid #525252;'>";
+		echo "<tr><td style='width:300px;padding-left:3px;'>Sparepart Name</td>";
+		echo "<td style='width:100px;padding-left:3px;'>Barcode</td>";
+		echo "<td style='width:100px;text-align:center;'>Sparepart id</td>";
+		echo "<td style='width:100px;padding-left:3px;'>Part Number</td>";
+		echo "<td style='width:200px;padding-left:3px;'>Machine</td>";
+		echo "</tr>";
+		echo "<tr><td style='width:100px;'><input id='pc_partname' type='text' style='padding-left:3px;width:300px;height:20px;'/> </td>";
+		echo "<td style='width:100px;'><input id='pc_barcode' type='text' style='padding-left:3px;width:100px;height:20px;'/> </td>";
+		echo "<td style='width:100px;'><input id='pc_sparepartid' type='text' style='text-align:center;width:100px;height:20px;'/> </td>";
+		echo "<td style='width:100px;'><input id='pc_partnumber' type='text' style='padding-left:3px;width:150px;height:20px;'/> </td>";
+		echo "<td style='width:100px;'><input id='pc_machine' type='text' style='padding-left:3px;width:200px;height:20px;'/> </td>";
+		echo "<td style='display:none;width:100px;'><input id='pc_docno' value='$_GET[pcdocno]' type='text' style='padding-left:3px;width:200px;height:20px;'/> </td>";
+
+		echo "</tr>";
+	echo "</table>";
+	//echo "</div>";
+
 echo "<tr><td style='width:1000px;text-align:left;'>Physical Count Document : $_GET[pcdocno] Count Date : $_GET[countdate] Store : $_GET[storeid]</td><td>";
 echo "<tr><td style='width:1000px;text-align:left;font-size:13px;color:red;'>*Update quantity</td><td></div> </td></tr>";
 echo "</table>";
 echo "<table style='font-size:10px;font-family:arial;' cellpadding='0' cellspacing='0'>";
-echo "<tr style='background-color:#3796AA;color:#FFFFFF;'>";
+echo "<tr style='background-color:#3796AA;color:#FFFFFF;cursor:pointer;'title='click to sort'>";
 echo "<td style='width:30px;height:30px;font-weight:bold;border:1px solid #ACACAC;border-right:0px;text-align:center;'>No</td>";
 echo "<td style='width:100px;height:30px;font-weight:bold;border:1px solid #ACACAC;border-right:0px;padding-left:3px;'>Barcode</td>";
 echo "<td style='width:100px;height:30px;font-weight:bold;border:1px solid #ACACAC;border-right:0px;padding-left:3px;'>Sparepart ID</td>";
-echo "<td style='width:210px;height:30px;font-weight:bold;border:1px solid #ACACAC;border-right:0px;padding-left:3px;'>Sparepart Description</td>";
+echo "<td id='pc_sortPartName' style='width:210px;height:30px;font-weight:bold;border:1px solid #ACACAC;border-right:0px;padding-left:3px;'>Sparepart Description</td>";
 echo "<td style='width:150px;height:30px;font-weight:bold;border:1px solid #ACACAC;border-right:0px;padding-left:3px;'>Part Number</td>";
 echo "<td style='width:210px;height:30px;font-weight:bold;border:1px solid #ACACAC;border-right:0px;padding-left:3px;'>Machine</td>";
 echo "<td style='width:80px;height:30px;font-weight:bold;border:1px solid #ACACAC;border-right:0px;padding-left:3px;'>Critical</td>";
@@ -59,7 +79,7 @@ if (!mysql_num_rows($result1) == 0 )
 		echo "<tr class='$list_class' >";
 		echo "<td  style='width:30px;height:22px;border:1px solid #ACACAC;border-right:0px;border-left:0px;border-top:0px;text-align:center;'>$no</td>";
 		echo "<td style='width:100px;border:1px solid #ACACAC;border-right:0px;border-top:0px;padding-left:3px;'>$barcode</td>";
-		echo "<td id='pc_docno' style='display:none;'>$pcdocno</td>";
+		//echo "<td id='pc_docno' style='display:none;'>$pcdocno</td>";
 		echo "<td id='pc_sparepartid'style='width:100px;border:1px solid #ACACAC;border-right:0px;border-top:0px;padding-left:3px;'>$row1[sparepartid]</td>";
 		echo "<td style='width:210px;border:1px solid #ACACAC;border-right:0px;border-top:0px;padding-left:3px;'>$description</td>";
 		echo "<td style='width:150px;border:1px solid #ACACAC;border-right:0px;border-top:0px;padding-left:3px;'>$partnumber</td>";

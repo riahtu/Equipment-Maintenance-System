@@ -44,7 +44,9 @@ if (!mysql_num_rows($result1) == 0 )
 		echo "<td style='width:210px;border:1px solid #ACACAC;border-right:0px;border-top:0px;padding-left:3px;'>$username</td>";
 		echo "<td style='text-align:left;width:300px;border:1px solid #ACACAC;border-top:0px;border-right:0px;padding-left:3px;'>$row1[remarks]</td>";
 		echo "<td style='width:60px;border:1px solid #ACACAC;border-top:0px;border-right:0px;padding-left:3px;'>";
-		echo "<div class='pc_m2_view' title='View' pcdocno='$row1[pc_docno]' countdate='$row1[countdate]' storeid='$row1[storeid]' username='$username' data-popup-target='#example-popup'></div>"; 
+		echo "<div class='pc_m2_view' title='View' pcdocno='$row1[pc_docno]' countdate='$row1[countdate]' storeid='$row1[storeid]' username='$username' data-popup-target='#example-popup'></div>";
+		if($_SESSION[role] == 'ADMIN') 
+			echo "<div id='delete_pc' class='icon_part_delete' title='Delete Schedule' pcdocno='$row1[pc_docno]'></div>";
 		echo "</td>";
 		echo "</tr>";
 		
