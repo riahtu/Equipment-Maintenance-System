@@ -2,7 +2,7 @@
 session_start();
  require('db_ems.php');
 
-echo "<div style='margin-top:10px;text-align:left;width:80%;font-size:14px;text-align:left;font-weight:bold;color:#404000;'>Register New Production Line</div>";
+echo "<div style='margin-top:10px;text-align:left;width:80%;font-size:14px;text-align:left;font-weight:bold;color:#404000;'>Add New Production Line</div>";
 		echo "<table border=0 style='border-radius:5px;width:50%;border:1px solid #D3D3D3;padding:5px;margin-top:5px;margin-left:10px;text-align:left;font-family:Arial;font-size:11px;height:60px;'>";
 		echo "<tr><td style='width:100px;padding-left:5px;color:#383838;'>Line Description</td>";
 		echo "<td><input id='lineDescription' value='$lineDesciption' style='width:300px;height:24px;'></tr>";
@@ -18,7 +18,7 @@ echo "<div style='margin-top:10px;text-align:left;width:80%;font-size:14px;text-
 		echo "<td><button id='master_prodline_save' style='width:100px;height:30px;'>Save</button></tr>";
 		echo "</table>";
 
-echo "<div style='margin-top:30px;text-align:left;width:80%;font-size:14px;text-align:left;font-weight:bold;color:#404000;'>Register New Supplier</div>";
+echo "<div style='margin-top:30px;text-align:left;width:80%;font-size:14px;text-align:left;font-weight:bold;color:#404000;'>Add New Supplier</div>";
 		echo "<table border=0 style='border-radius:5px;width:50%;border:1px solid #D3D3D3;padding:5px;margin-top:5px;margin-left:10px;text-align:left;font-family:Arial;font-size:11px;height:60px;'>";
 
 		echo "<tr><td style='width:100px;padding-left:5px;color:#383838;'>Supplier Name</td>";
@@ -35,7 +35,7 @@ echo "<div style='margin-top:30px;text-align:left;width:80%;font-size:14px;text-
 		echo "<td><button id='master_supplier_save' style='width:100px;height:30px;'>Save</button></tr>";
 		echo "</table>";
 
-echo "<div style='margin-top:30px;text-align:left;width:80%;font-size:14px;text-align:left;font-weight:bold;color:#404000;'>Register New Manufacturer</div>";
+echo "<div style='margin-top:30px;text-align:left;width:80%;font-size:14px;text-align:left;font-weight:bold;color:#404000;'>Add New Manufacturer / Brand</div>";
 		echo "<table border=0 style='border-radius:5px;width:50%;border:1px solid #D3D3D3;padding:5px;margin-top:5px;margin-left:10px;text-align:left;font-family:Arial;font-size:11px;height:60px;'>";
 
 		echo "<tr><td style='width:100px;padding-left:5px;color:#383838;'>Manufacturer Name</td>";

@@ -1,7 +1,7 @@
 <?php
 session_start();
  require('db_ems.php');
-echo "<div style='margin-top:10px;text-align:left;width:80%;font-size:14px;text-align:left;font-weight:bold;color:#404000;'>Register New Sparepart</div>";
+echo "<div style='margin-top:10px;text-align:left;width:80%;font-size:14px;text-align:left;font-weight:bold;color:#404000;'>Add New Sparepart</div>";
 session_start();
  require('db_ems.php');
 
@@ -47,7 +47,6 @@ session_start();
 			while($row11 = mysql_fetch_array($resultrec))
 			{
 				echo "<option value='$row11[equipmentid]'>$row11[description] | Line: $row11[linecode]</option>    ";
-			
 			}
 		echo "</td></tr>";
 

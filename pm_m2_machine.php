@@ -1,7 +1,7 @@
 <?php
 session_start();
  require('db_ems.php');
-echo "<div style='margin-top:10px;text-align:left;width:80%;font-size:14px;text-align:left;font-weight:bold;color:#404000;'>Register New Machine</div>";
+echo "<div style='margin-top:10px;text-align:left;width:80%;font-size:14px;text-align:left;font-weight:bold;color:#404000;'>Add New Machine</div>";
 session_start();
  require('db_ems.php');
 
