@@ -7,10 +7,13 @@ $s_partnumber = "%".$_GET[partnumber]."%";
 $s_sparepartid = "%".$_GET[sparepartid]."%";
 $s_pcdocno = "%".$_GET[pcdocno]."%";
 echo "<table  style='font-size:10px;font-family:arial;margin-top:2px;border:1px solid #ACACAC;margin-bottom:30px;overflow:auto;' cellpadding='0' cellspacing='0'>";
-$result1= mysql_query("SELECT * from physical_count_detail where pc_docno = '$_GET[pcdocno]'  
-															and	sp_description like '$s_partname'
-															and sparepartid like '$s_sparepartid' 	
-															order by sparepartid");
+$result1= mysql_query("SELECT * from physical_count_detail,m_sparepart where pc_docno = '$_GET[pcdocno]'  
+															and	physical_count_detail.sp_description like '$s_partname'
+															and physical_count_detail.sparepartid like '$s_sparepartid'
+															and m_sparepart.barcode like '$s_barcode'
+															and m_sparepart.part_number like '$s_partnumber' 
+															and physical_count_detail.sparepartid = m_sparepart.sparepartid	
+															order by physical_count_detail.sparepartid");
 if (!mysql_num_rows($result1) == 0 )
 {
 	$pcdocno = $_GET[pcdocno];
