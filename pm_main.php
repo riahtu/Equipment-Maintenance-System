@@ -17,7 +17,7 @@ echo "<td style='width:200px;vertical-align:top;'>";
 echo "<table border=0 style='width:100%;vertical-align:top;'>";
 echo "<tr><td id='pm_parts_enquiry' class='mm_left_menu mm_pick' style=''>Parts Balance Enquiry</td></tr>";
 echo "<tr><td id='pm_parts_master' class='mm_left_menu' style=''>Update Information</td></tr>";
-echo "<tr><td id='pm_parts_master_all' class='mm_left_menu' style=''>Register Information</td></tr>";
+echo "<tr><td id='pm_parts_master_all' class='mm_left_menu' style=''>Add New</td></tr>";
 //echo "<tr><td id='pp_m5' class='pp_left_menu' program='pp_m5.php' style=''>Sparepart By Maker</td></tr>";
 //echo "<tr><td id='pp_m7' class='pp_left_menu' program='pp_m7.php' style=''>Sparepart By Location</td></tr>";
 //echo "<tr><td id='pp_m6' class='pp_left_menu' program='pp_m6.php' style=''>Print Sparepart Label</td></tr>";

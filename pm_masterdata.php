@@ -2,7 +2,7 @@
 session_start();
  require('db_ems.php');
  echo "<div style='text-align:left;width:80%;font-size:20px;text-align:left;font-weight:bold;color:#404000;'>Data Management</div>";
-  echo "<div style='margin-top:20px;font-size:12px;color:#007CB9;font-weight:bold;text-align:left;margin-left:0px;margin-top:10px;'>Register New Info</div>";
+  echo "<div style='margin-top:20px;font-size:12px;color:#007CB9;font-weight:bold;text-align:left;margin-left:0px;margin-top:10px;'>Add New Information</div>";
 echo "<table style='width:100%;margin-top:10px;'>";
 echo "<tr>";
 echo "<td style='width:10px;border-bottom:1px solid #C5C5C5' ></td>";
